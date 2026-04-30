@@ -4,6 +4,7 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import userRouter from "./routes/user";
+import statsRouter from "./routes/stats";
 
 
 const app = express();
@@ -17,6 +18,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/user", userRouter);
+app.use("/api/stats", statsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

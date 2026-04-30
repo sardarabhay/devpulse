@@ -3,12 +3,7 @@ import { fetchGitHubUser, fetchUserRepos } from "../services/githubRestService";
 import axios from "axios";
 
 export const getUserProfile = async (req: Request, res: Response) => {
-  const rawUsername = req.params.username;
-  const username = Array.isArray(rawUsername) ? rawUsername[0] : rawUsername;
-
-  if (!username) {
-    return res.status(400).json({ error: "A valid GitHub username is required." });
-  }
+  const username = req.params.username as string;
 
   try {
     const [user, topRepos] = await Promise.all([
