@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import redis from "./services/redisClient";
 dotenv.config();
 
 import express from "express";
@@ -6,6 +7,9 @@ import cors from "cors";
 import userRouter from "./routes/user";
 import statsRouter from "./routes/stats";
 
+redis.connect().catch(() => {
+  console.warn("Redis unavailable .. caching disabled, app still works");
+});
 
 const app = express();
 const PORT = process.env.PORT || 5000;
