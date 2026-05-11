@@ -6,6 +6,7 @@ import express from "express";
 import cors from "cors";
 import userRouter from "./routes/user";
 import statsRouter from "./routes/stats";
+import compareRouter from "./routes/compare";
 
 redis.connect().catch(() => {
   console.warn("Redis unavailable .. caching disabled, app still works");
@@ -23,6 +24,7 @@ app.get("/api/health", (req, res) => {
 
 app.use("/api/user", userRouter);
 app.use("/api/stats", statsRouter);
+app.use("/api/compare", compareRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

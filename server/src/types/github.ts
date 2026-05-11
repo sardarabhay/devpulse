@@ -47,10 +47,16 @@ export interface ContributionData {
 export interface LanguageStat {
   name: string;
   color: string;
-  size: number; // bytes
+  size: number;
 }
 
 export interface StatsResponse {
   contributions: ContributionData;
   languages: LanguageStat[];
+}
+
+export interface Persona {
+  label: string;
+  emoji: string;
+  description: string;
 }
