@@ -1,15 +1,30 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useGitHubUser } from "../hooks/useGitHubUser";
+import { useGitHubStats } from "../hooks/useGitHubStats";
 import { ProfileHeader } from "../components/ProfileHeader";
 import { RepoCard } from "../components/RepoCard";
 import { SearchBar } from "../components/SearchBar";
+import { LanguageDonut } from "../components/LanguageDonut";
+import { ActivityLineChart } from "../components/ActivityLineChart";
+import { PersonaBadge } from "../components/PersonaBadge";
 
 export const Dashboard = () => {
   const { username } = useParams<{ username: string }>();
   const navigate = useNavigate();
-  const { data, isLoading, isError, error } = useGitHubUser(username ?? "");
 
-  if (isLoading) {
+  const {
+    data: profileData,
+    isLoading: profileLoading,
+    isError,
+    error,
+  } = useGitHubUser(username ?? "");
+
+  const {
+    data: statsData,
+    isLoading: statsLoading,
+  } = useGitHubStats(username ?? "");
+
+  if (profileLoading) {
     return (
       <div className="status-screen">
         <div className="spinner" />
@@ -31,7 +46,7 @@ export const Dashboard = () => {
     );
   }
 
-  if (!data) return null;
+  if (!profileData) return null;
 
   return (
     <div className="dashboard">
@@ -41,19 +56,38 @@ export const Dashboard = () => {
       </nav>
 
       <main className="dash-main">
-        <ProfileHeader user={data.user} />
+        <ProfileHeader user={profileData.user} />
+
+        
+        {statsLoading && (
+          <div className="charts-loading">
+            <div className="spinner" />
+            <p>Loading analytics...</p>
+          </div>
+        )}
+
+        {statsData && (
+          <>
+            <PersonaBadge persona={statsData.persona} />
+
+            <div className="charts-grid">
+              <ActivityLineChart contributions={statsData.contributions} />
+              <LanguageDonut languages={statsData.languages} />
+            </div>
+          </>
+        )}
 
         <section className="repos-section">
           <h2 className="section-title">Top Repositories</h2>
           <div className="repos-grid">
-            {data.topRepos.map((repo) => (
+            {profileData.topRepos.map((repo) => (
               <RepoCard key={repo.id} repo={repo} />
             ))}
           </div>
         </section>
 
         <div className="unlock-banner">
-          🔒 Want contribution heatmap, language stats & shareable card?{" "}
+          🔒 Want private repo stats & a shareable card?{" "}
           <button className="unlock-btn">Login with GitHub →</button>
         </div>
       </main>

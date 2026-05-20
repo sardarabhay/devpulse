@@ -27,3 +27,36 @@ export interface UserProfileResponse {
   user: GitHubUser;
   topRepos: GitHubRepo[];
 }
+
+export interface ContributionDay {
+  date: string;
+  contributionCount: number;
+  color: string;
+}
+
+export interface ContributionWeek {
+  contributionDays: ContributionDay[];
+}
+
+export interface ContributionData {
+  totalContributions: number;
+  weeks: ContributionWeek[];
+}
+
+export interface LanguageStat {
+  name: string;
+  color: string;
+  size: number;
+}
+
+export interface Persona {
+  label: string;
+  emoji: string;
+  description: string;
+}
+
+export interface StatsResponse {
+  contributions: ContributionData;
+  languages: LanguageStat[];
+  persona: Persona;
+}

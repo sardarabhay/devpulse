@@ -1,4 +1,5 @@
 import { SearchBar } from "../components/SearchBar";
+import { Link } from "react-router-dom"
 
 export const Landing = () => {
   return (
@@ -13,8 +14,8 @@ export const Landing = () => {
         <SearchBar />
         <p className="landing-hint">
           Try{" "}
-          <a href="/u/torvalds" className="hint-link">torvalds</a>,{" "}
-          <a href="/u/gaearon" className="hint-link">gaearon</a>, or your own username
+          <Link to="/u/torvalds" className="hint-link">torvalds</Link>,{" "}
+          <Link to="/u/gaearon" className="hint-link">gaearon</Link>, or your own username
         </p>
       </div>
     </div>
