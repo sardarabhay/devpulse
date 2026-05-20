@@ -368,3 +368,103 @@ body {
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
+
+/* ── Heatmap ── */
+.heatmap-card { margin-bottom: 1rem; }
+
+.heatmap-wrapper {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.heatmap-wrapper svg { width: 100%; }
+
+/* Override library defaults */
+.react-calendar-heatmap text {
+  fill: #6b6b8a;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+}
+
+.react-calendar-heatmap .color-empty { fill: #1e1e2e; }
+.react-calendar-heatmap .color-scale-1 { fill: #1a4d1a; }
+.react-calendar-heatmap .color-scale-2 { fill: #2d7a2d; }
+.react-calendar-heatmap .color-scale-3 { fill: #4aad4a; }
+.react-calendar-heatmap .color-scale-4 { fill: #7fff6e; }
+
+.react-calendar-heatmap rect:hover { stroke: #7fff6e; stroke-width: 1px; }
+
+/* Legend */
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+
+.legend-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  margin: 0 4px;
+}
+
+.legend-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ── Stats Summary Bar ── */
+.stats-summary {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 720px) {
+  .stats-summary { grid-template-columns: repeat(3, 1fr); }
+}
+
+.summary-stat {
+  background: var(--surface);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.summary-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.summary-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.legend-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.legend-box.color-empty { background: #1e1e2e; }
+.legend-box.color-scale-1 { background: #1a4d1a; }
+.legend-box.color-scale-2 { background: #2d7a2d; }
+.legend-box.color-scale-3 { background: #4aad4a; }
+.legend-box.color-scale-4 { background: #7fff6e; }

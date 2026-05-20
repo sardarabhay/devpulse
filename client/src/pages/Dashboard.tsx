@@ -7,6 +7,8 @@ import { SearchBar } from "../components/SearchBar";
 import { LanguageDonut } from "../components/LanguageDonut";
 import { ActivityLineChart } from "../components/ActivityLineChart";
 import { PersonaBadge } from "../components/PersonaBadge";
+import { HeatmapChart } from "../components/HeatmapChart";
+import { StatsSummary } from "../components/StatsSummary";
 
 export const Dashboard = () => {
   const { username } = useParams<{ username: string }>();
@@ -19,10 +21,9 @@ export const Dashboard = () => {
     error,
   } = useGitHubUser(username ?? "");
 
-  const {
-    data: statsData,
-    isLoading: statsLoading,
-  } = useGitHubStats(username ?? "");
+  const { data: statsData, isLoading: statsLoading } = useGitHubStats(
+    username ?? ""
+  );
 
   if (profileLoading) {
     return (
@@ -51,14 +52,15 @@ export const Dashboard = () => {
   return (
     <div className="dashboard">
       <nav className="dash-nav">
-        <a href="/" className="nav-logo">DevPulse</a>
+        <a href="/" className="nav-logo">
+          DevPulse
+        </a>
         <SearchBar />
       </nav>
 
       <main className="dash-main">
         <ProfileHeader user={profileData.user} />
 
-        
         {statsLoading && (
           <div className="charts-loading">
             <div className="spinner" />
@@ -68,8 +70,19 @@ export const Dashboard = () => {
 
         {statsData && (
           <>
+           
+            <StatsSummary
+              contributions={statsData.contributions}
+              languages={statsData.languages}
+            />
+
+            
             <PersonaBadge persona={statsData.persona} />
 
+            
+            <HeatmapChart contributions={statsData.contributions} />
+
+            
             <div className="charts-grid">
               <ActivityLineChart contributions={statsData.contributions} />
               <LanguageDonut languages={statsData.languages} />
