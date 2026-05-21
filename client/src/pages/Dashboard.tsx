@@ -9,6 +9,8 @@ import { ActivityLineChart } from "../components/ActivityLineChart";
 import { PersonaBadge } from "../components/PersonaBadge";
 import { HeatmapChart } from "../components/HeatmapChart";
 import { StatsSummary } from "../components/StatsSummary";
+import { useAuth } from "../context/AuthContext";
+
 
 export const Dashboard = () => {
   const { username } = useParams<{ username: string }>();
@@ -24,6 +26,8 @@ export const Dashboard = () => {
   const { data: statsData, isLoading: statsLoading } = useGitHubStats(
     username ?? ""
   );
+
+  const { user, logout } = useAuth();
 
   if (profileLoading) {
     return (
@@ -52,11 +56,23 @@ export const Dashboard = () => {
   return (
     <div className="dashboard">
       <nav className="dash-nav">
-        <a href="/" className="nav-logo">
-          DevPulse
-        </a>
-        <SearchBar />
-      </nav>
+  <a href="/" className="nav-logo">DevPulse</a>
+  <SearchBar />
+  {user ? (
+    <div className="nav-user">
+      <img src={user.avatar_url} alt={user.login} className="nav-avatar" />
+      <span className="nav-username">@{user.login}</span>
+      <button onClick={logout} className="nav-logout">Logout</button>
+    </div>
+  ) : (
+    <a
+      href={`${import.meta.env.VITE_API_BASE_URL}/auth/github`}
+      className="nav-login-btn"
+    >
+      Login with GitHub
+    </a>
+  )}
+</nav>
 
       <main className="dash-main">
         <ProfileHeader user={profileData.user} />
@@ -99,10 +115,17 @@ export const Dashboard = () => {
           </div>
         </section>
 
-        <div className="unlock-banner">
-          🔒 Want private repo stats & a shareable card?{" "}
-          <button className="unlock-btn">Login with GitHub →</button>
-        </div>
+        {!user && (
+          <div className="unlock-banner">
+            🔒 Want private repo stats & a shareable card?{" "}
+            <a
+              href={`${import.meta.env.VITE_API_BASE_URL}/auth/github`}
+              className="unlock-btn"
+            >
+              Login with GitHub →
+            </a>
+          </div>
+        )}
       </main>
     </div>
   );

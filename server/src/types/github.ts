@@ -60,3 +60,10 @@ export interface Persona {
   emoji: string;
   description: string;
 }
+
+export interface AuthenticatedUser {
+  login: string;
+  name: string | null;
+  avatar_url: string;
+  accessToken: string;
+}
