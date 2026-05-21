@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (res.data.authenticated) setUser(res.data.user);
       })
       .catch(() => {
-        // not logged in — that's fine
+        setUser(null);
       })
       .finally(() => setIsLoading(false));
   }, []);

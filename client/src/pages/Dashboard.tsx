@@ -10,6 +10,7 @@ import { PersonaBadge } from "../components/PersonaBadge";
 import { HeatmapChart } from "../components/HeatmapChart";
 import { StatsSummary } from "../components/StatsSummary";
 import { useAuth } from "../context/AuthContext";
+import { ShareButton } from "../components/ShareButton";
 
 
 export const Dashboard = () => {
@@ -56,23 +57,24 @@ export const Dashboard = () => {
   return (
     <div className="dashboard">
       <nav className="dash-nav">
-  <a href="/" className="nav-logo">DevPulse</a>
-  <SearchBar />
-  {user ? (
-    <div className="nav-user">
-      <img src={user.avatar_url} alt={user.login} className="nav-avatar" />
-      <span className="nav-username">@{user.login}</span>
-      <button onClick={logout} className="nav-logout">Logout</button>
-    </div>
-  ) : (
-    <a
-      href={`${import.meta.env.VITE_API_BASE_URL}/auth/github`}
-      className="nav-login-btn"
-    >
-      Login with GitHub
-    </a>
-  )}
-</nav>
+        <a href="/" className="nav-logo">DevPulse</a>
+        <SearchBar />
+        <a href="/compare" className="compare-nav-link">Compare →</a>
+        {user ? (
+          <div className="nav-user">
+            <img src={user.avatar_url} alt={user.login} className="nav-avatar" />
+            <span className="nav-username">@{user.login}</span>
+            <button onClick={logout} className="nav-logout">Logout</button>
+          </div>
+        ) : (
+          <a
+            href={`${import.meta.env.VITE_API_BASE_URL}/auth/github`}
+            className="nav-login-btn"
+          >
+            Login with GitHub
+          </a>
+        )}
+      </nav>
 
       <main className="dash-main">
         <ProfileHeader user={profileData.user} />
@@ -86,19 +88,20 @@ export const Dashboard = () => {
 
         {statsData && (
           <>
-           
+
             <StatsSummary
               contributions={statsData.contributions}
               languages={statsData.languages}
             />
 
-            
+
             <PersonaBadge persona={statsData.persona} />
 
-            
+            <ShareButton username={username ?? ""} />
+
             <HeatmapChart contributions={statsData.contributions} />
 
-            
+
             <div className="charts-grid">
               <ActivityLineChart contributions={statsData.contributions} />
               <LanguageDonut languages={statsData.languages} />

@@ -19,3 +19,16 @@ export const fetchUserStats = async (
   const { data } = await api.get<StatsResponse>(`/api/stats/${username}`);
   return data;
 };
+
+export interface CompareResponse {
+  user1: any;
+  user2: any;
+}
+
+export const fetchCompare = async (
+  u1: string,
+  u2: string
+): Promise<CompareResponse> => {
+  const { data } = await api.get<CompareResponse>(`/api/compare/${u1}/${u2}`);
+  return data;
+};
