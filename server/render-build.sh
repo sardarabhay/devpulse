@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-apt-get install -y \
-  libcairo2-dev \
-  libpango1.0-dev \
-  libjpeg-dev \
-  libgif-dev \
-  librsvg2-dev
+set -e
 
-npm install
+echo "Installing dependencies..."
+npm install --include=dev
+
+echo "Building TypeScript..."
 npm run build
