@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config();
+import * as dotenv from "dotenv";
+dotenv.config(); 
 
 import express from "express";
 import cors from "cors";
@@ -54,8 +54,8 @@ app.use("/api/compare", compareRouter);
 app.use("/auth", authRouter);
 app.use("/api/card", cardRouter);
 
-redis.connect().catch(() => {
-  console.warn("Redis unavailable — caching disabled, app still works");
+redis.connect().catch((err) => {
+  console.warn("Redis unavailable — caching disabled, app still works:", err.message);
 });
 
 app.listen(PORT, () => {
