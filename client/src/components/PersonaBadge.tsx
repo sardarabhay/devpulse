@@ -7,7 +7,7 @@ interface Props {
 export const PersonaBadge = ({ persona }: Props) => {
   return (
     <div className="persona-badge">
-      <span className="persona-emoji">{persona.emoji}</span>
+      <div className="persona-indicator" />
       <div className="persona-text">
         <span className="persona-label">{persona.label}</span>
         <span className="persona-desc">{persona.description}</span>

@@ -30,8 +30,8 @@ export const RepoCard = ({ repo }: Props) => {
       <div className="repo-top">
         <span className="repo-name">{repo.name}</span>
         <div className="repo-stats">
-          <span>⭐ {repo.stargazers_count}</span>
-          <span>🍴 {repo.forks_count}</span>
+          <span>{repo.stargazers_count} stars</span>
+          <span>{repo.forks_count} forks</span>
         </div>
       </div>
       {repo.description && (

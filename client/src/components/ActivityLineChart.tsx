@@ -24,13 +24,13 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export const ActivityLineChart = ({ contributions }: Props) => {
-  
+
   const data = contributions.weeks.map((week) => {
     const total = week.contributionDays.reduce(
       (sum, d) => sum + d.contributionCount,
       0
     );
-   
+
     const date = new Date(week.contributionDays[0].date);
     const label = date.toLocaleDateString("en-US", {
       month: "short",
@@ -39,7 +39,7 @@ export const ActivityLineChart = ({ contributions }: Props) => {
     return { label, total };
   });
 
-  
+
   const tickFormatter = (_: string, index: number) =>
     index % 8 === 0 ? data[index]?.label ?? "" : "";
 
@@ -55,9 +55,10 @@ export const ActivityLineChart = ({ contributions }: Props) => {
       <ResponsiveContainer width="100%" height={220}>
         <LineChart data={data} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#1e1e2e" />
+          // ActivityLineChart.tsx
           <XAxis
             dataKey="label"
-            tickFormatter={tickFormatter}
+            interval={12}          // show every 13th label (~monthly)
             tick={{ fill: "#6b6b8a", fontSize: 11, fontFamily: "DM Mono" }}
             axisLine={false}
             tickLine={false}

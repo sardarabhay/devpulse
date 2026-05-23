@@ -59,21 +59,25 @@ export const Dashboard = () => {
       <nav className="dash-nav">
         <a href="/" className="nav-logo">DevPulse</a>
         <SearchBar />
-        <a href="/compare" className="compare-nav-link">Compare →</a>
-        {user ? (
-          <div className="nav-user">
-            <img src={user.avatar_url} alt={user.login} className="nav-avatar" />
-            <span className="nav-username">@{user.login}</span>
-            <button onClick={logout} className="nav-logout">Logout</button>
-          </div>
-        ) : (
-          <a
-            href={`${import.meta.env.VITE_API_BASE_URL}/auth/github`}
-            className="nav-login-btn"
-          >
-            Login with GitHub
-          </a>
-        )}
+        <div className="nav-spacer" >
+          <a href="/compare" className="compare-nav-link">Compare →</a>
+          {user ? (
+            <div className="nav-user">
+              <img src={user.avatar_url} alt={user.login} className="nav-avatar" />
+              <span className="nav-username">@{user.login}</span>
+              <button onClick={logout} className="nav-logout">Logout</button>
+            </div>
+          ) : (
+            <a
+              href={`${import.meta.env.VITE_API_BASE_URL}/auth/github`}
+              className="nav-login-btn"
+            >
+              Login with GitHub
+            </a>
+          )}
+        </div>
+
+
       </nav>
 
       <main className="dash-main">
@@ -120,12 +124,12 @@ export const Dashboard = () => {
 
         {!user && (
           <div className="unlock-banner">
-            🔒 Want private repo stats & a shareable card?{" "}
-            <a
-              href={`${import.meta.env.VITE_API_BASE_URL}/auth/github`}
+            Login with GitHub to generate your shareable card
+
+            <a href={`${import.meta.env.VITE_API_BASE_URL}/auth/github`}
               className="unlock-btn"
             >
-              Login with GitHub →
+              Login with GitHub
             </a>
           </div>
         )}

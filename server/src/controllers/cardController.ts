@@ -3,6 +3,12 @@ import { generateCard } from "../services/cardService";
 import { getCache, setCache, buildKey } from "../services/cacheService";
 
 export const getShareableCard = async (req: Request, res: Response) => {
+  const session = req.session as typeof req.session & { user?: unknown };
+
+  if (!session.user) {
+    return res.status(401).json({ error: "Login with GitHub to generate your card." });
+  }
+
   const username = req.params.username as string;
   const cacheKey = buildKey("card", username);
 

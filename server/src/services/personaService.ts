@@ -74,7 +74,7 @@ export const computePersona = (data: ContributionData): Persona => {
   if (p.longestStreak >= 30) {
     return {
       label: "Consistent Grinder",
-      emoji: "💪",
+      emoji: "",
       description: `${p.longestStreak}-day longest streak. Shows up every single day.`,
     };
   }
@@ -82,7 +82,7 @@ export const computePersona = (data: ContributionData): Persona => {
   if (p.burstDays >= 20) {
     return {
       label: "Sprinter",
-      emoji: "⚡",
+      emoji: "",
       description: `${p.burstDays} high-output days. Ships in intense bursts.`,
     };
   }
@@ -90,7 +90,7 @@ export const computePersona = (data: ContributionData): Persona => {
   if (weekendRatio >= 0.4) {
     return {
       label: "Weekend Warrior",
-      emoji: "🏕️",
+      emoji: "",
       description: "Most commits land on weekends. Builds on their own time.",
     };
   }
@@ -98,7 +98,7 @@ export const computePersona = (data: ContributionData): Persona => {
   if (activeRatio >= 0.6) {
     return {
       label: "Steady Builder",
-      emoji: "🧱",
+      emoji: "",
       description: "Consistently active. Reliable, methodical output.",
     };
   }
@@ -106,14 +106,14 @@ export const computePersona = (data: ContributionData): Persona => {
   if (p.currentStreak >= 7) {
     return {
       label: "On A Roll",
-      emoji: "🔥",
+      emoji: "",
       description: `${p.currentStreak}-day current streak. Building momentum right now.`,
     };
   }
 
   return {
     label: "Explorer",
-    emoji: "🧭",
+    emoji: "",
     description: "Varied activity patterns. Curious, project-driven coder.",
   };
 };

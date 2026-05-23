@@ -23,9 +23,10 @@ export const HeatmapChart = ({ contributions }: Props) => {
     }))
   );
 
-  const endDate = new Date();
-  const startDate = new Date();
-  startDate.setFullYear(startDate.getFullYear() - 1);
+const endDate = new Date();
+const startDate = new Date(endDate);
+startDate.setFullYear(endDate.getFullYear() - 1);
+startDate.setDate(startDate.getDate() + 1); 
 
   return (
     <div className="chart-card heatmap-card">
