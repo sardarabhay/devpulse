@@ -57,13 +57,21 @@ export const Dashboard = () => {
   return (
     <div className="dashboard">
       <nav className="dash-nav">
-        <a href="/" className="nav-logo">DevPulse</a>
+        <a href="/" className="nav-logo">
+          DevPulse
+        </a>
         <SearchBar />
-        <div className="nav-spacer" >
-          <a href="/compare" className="compare-nav-link">Compare →</a>
+        <div className="nav-actions">
+          <a href="/compare" className="compare-nav-link">
+            Compare →
+          </a>
           {user ? (
             <div className="nav-user">
-              <img src={user.avatar_url} alt={user.login} className="nav-avatar" />
+              <img
+                src={user.avatar_url}
+                alt={user.login}
+                className="nav-avatar"
+              />
               <span className="nav-username">@{user.login}</span>
               <button onClick={logout} className="nav-logout">Logout</button>
             </div>
@@ -76,8 +84,6 @@ export const Dashboard = () => {
             </a>
           )}
         </div>
-
-
       </nav>
 
       <main className="dash-main">

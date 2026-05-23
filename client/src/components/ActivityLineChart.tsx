@@ -40,8 +40,6 @@ export const ActivityLineChart = ({ contributions }: Props) => {
   });
 
 
-  
-
   return (
     <div className="chart-card">
       <h3 className="chart-title">
