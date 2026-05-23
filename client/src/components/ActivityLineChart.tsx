@@ -40,8 +40,7 @@ export const ActivityLineChart = ({ contributions }: Props) => {
   });
 
 
-  const tickFormatter = (_: string, index: number) =>
-    index % 8 === 0 ? data[index]?.label ?? "" : "";
+  
 
   return (
     <div className="chart-card">
