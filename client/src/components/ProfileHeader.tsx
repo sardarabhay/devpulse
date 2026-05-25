@@ -1,5 +1,43 @@
 import { type GitHubUser } from "../types/github";
 
+const LocationIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 1 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const CalendarIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" />
+  </svg>
+);
+
 interface Props {
   user: GitHubUser;
 }
@@ -22,8 +60,14 @@ export const ProfileHeader = ({ user }: Props) => {
         </a>
         {user.bio && <p className="profile-bio">{user.bio}</p>}
         <div className="profile-meta">
-          {user.location && <span>📍 {user.location}</span>}
-          <span>📅 Joined {joinYear}</span>
+          {user.location && (
+            <span className="meta-item">
+              <LocationIcon className="icon" /> {user.location}
+            </span>
+          )}
+          <span className="meta-item">
+            <CalendarIcon className="icon" /> Joined {joinYear}
+          </span>
         </div>
         <div className="stats-row">
           <div className="stat">
